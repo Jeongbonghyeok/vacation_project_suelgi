@@ -22,9 +22,7 @@ export default function Main() {
 
 
     
-
-
-
+/*
     const toDataURL = (blobOrFile) =>
       new Promise((resolve, reject) => {
         const r = new FileReader();
@@ -32,70 +30,70 @@ export default function Main() {
         r.onerror = reject;
         r.readAsDataURL(blobOrFile);
       });
-
+*/
 
       // 1) 파일을 리사이즈해서 캔버스 + dataURL + (w,h) 반환
-const fileToResizedCanvas = (file, maxSide = 1536) =>
-  new Promise((resolve, reject) => {
-    const img = new Image();
-    const objUrl = URL.createObjectURL(file);
-
-    img.onload = () => {
-      const { width, height } = img;
-      const scale = Math.min(1, maxSide / Math.max(width, height));
-      const w = Math.round(width * scale);
-      const h = Math.round(height * scale);
-
-      const canvas = document.createElement("canvas");
-      canvas.width = w;
-      canvas.height = h;
-
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, w, h);
-
-      URL.revokeObjectURL(objUrl);
-      resolve({ canvas, w, h });
-    };
-
-    img.onerror = (e) => {
-      URL.revokeObjectURL(objUrl);
-      reject(e);
-    };
-
-    img.src = objUrl;
-  });
-
-// 2) 이미지/마스크(Blob)를 target (w,h)로 리사이즈해서 dataURL 반환
-  const blobToResizedDataURL = (blob, w, h, mime = "image/png", quality) =>
-    new Promise((resolve, reject) => {
-      const img = new Image();
-      const objUrl = URL.createObjectURL(blob);
-
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = w;
-        canvas.height = h;
-
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, w, h);
-
-        URL.revokeObjectURL(objUrl);
-
-        // png는 quality 무시됨(상관없음)
-        resolve(quality != null ? canvas.toDataURL(mime, quality) : canvas.toDataURL(mime));
-      };
-
-      img.onerror = (e) => {
-        URL.revokeObjectURL(objUrl);
-        reject(e);
-      };
-
-      img.src = objUrl;
-    });
-
+    const fileToResizedCanvas = (file, maxSide = 1536) =>
+      new Promise((resolve, reject) => {
+        const img = new Image();
+        const objUrl = URL.createObjectURL(file);
+      
+        img.onload = () => {
+          const { width, height } = img;
+          const scale = Math.min(1, maxSide / Math.max(width, height));
+          const w = Math.round(width * scale);
+          const h = Math.round(height * scale);
+        
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+        
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, w, h);
+        
+          URL.revokeObjectURL(objUrl);
+          resolve({ canvas, w, h });
+        };
+      
+        img.onerror = (e) => {
+          URL.revokeObjectURL(objUrl);
+          reject(e);
+        };
+      
+        img.src = objUrl;
+      });
+    
+    // 2) 이미지/마스크(Blob)를 target (w,h)로 리사이즈해서 dataURL 반환
+      const blobToResizedDataURL = (blob, w, h, mime = "image/png", quality) =>
+        new Promise((resolve, reject) => {
+          const img = new Image();
+          const objUrl = URL.createObjectURL(blob);
+        
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+          
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, w, h);
+          
+            URL.revokeObjectURL(objUrl);
+          
+            // png는 quality 무시됨(상관없음)
+            resolve(quality != null ? canvas.toDataURL(mime, quality) : canvas.toDataURL(mime));
+          };
+        
+          img.onerror = (e) => {
+            URL.revokeObjectURL(objUrl);
+            reject(e);
+          };
+        
+          img.src = objUrl;
+        });
       
 
-
+      
+/*
 
       const toResizedDataURL = (file, maxSide = 1536, mime = "image/jpeg", quality = 0.85) =>
         new Promise((resolve, reject) => {
@@ -128,7 +126,7 @@ const fileToResizedCanvas = (file, maxSide = 1536) =>
         });
 
 
-
+*/
 
     const handleRemove = async () => {
       if (!imageFile) return;
