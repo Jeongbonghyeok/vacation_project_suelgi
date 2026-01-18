@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/inpaint",
+      "destination": "https://hugmeBabe-suelgi-io-api.hf.space/api/v1/inpaint"
+    }
+  ]
+}
