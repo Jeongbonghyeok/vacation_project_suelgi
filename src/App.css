@@ -1,38 +1,391 @@
-.App {
+/* App.css */
+/* 기능/구조 건드리지 않고 “흰배경 + 깔끔 + 신경쓴 느낌”만 주는 스타일 */
+
+/* ---------- Base ---------- */
+:root{
+  --nfu-bg: #ffffff;
+  --nfu-text: #111827;
+  --nfu-muted: #6b7280;
+  --nfu-border: #e5e7eb;
+  --nfu-card: #ffffff;
+  --nfu-shadow: 0 10px 28px rgba(17, 24, 39, 0.08);
+  --nfu-shadow-sm: 0 6px 16px rgba(17, 24, 39, 0.06);
+  --nfu-radius: 18px;
+}
+
+html, body, #root, .App{
+  height: 100%;
+}
+
+body{
+  background: var(--nfu-bg);
+  color: var(--nfu-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* 상단만 은은한 그라데이션 (구조 변경 없이) */
+body{
+  /* 기존 body 스타일이 있으면 이 2줄만 추가/병합 
+  rgba(17,24,39,0.10) 0px,*/
+  background:
+    linear-gradient(to bottom, rgba(20,30,40,0.10) 100px, rgba(15,22,37,0.00) 310px),
+    #ffffff;
+  background-repeat: no-repeat;
+  font-family: "Pretendard", system-ui, -apple-system, sans-serif;
+}
+
+
+.container{
+  max-width: 1140px;
+}
+
+/* ---------- Typography polish ---------- */
+h1, h2, h3, .fw-bold{
+  letter-spacing: -0.02em;
+}
+
+.text-secondary{
+  color: var(--nfu-muted) !important;
+}
+
+/* ---------- Cards (Bootstrap card override) ---------- */
+.card{
+  background: var(--nfu-card);
+  border: 1px solid var(--nfu-border);
+  border-radius: var(--nfu-radius) !important;
+  box-shadow: var(--nfu-shadow-sm);
+}
+
+.card-body{
+  padding: 1.25rem;
+}
+
+@media (min-width: 992px){
+  .card-body{
+    padding: 1.5rem;
+  }
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 0.5rem 0.9rem;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+
+.btn:active{
+  transform: translateY(0px);
+}
+
+.btn-dark{
+  box-shadow: 0 10px 18px rgba(17, 24, 39, 0.12);
+}
+
+.btn:hover{
+  box-shadow: 0 12px 22px rgba(17, 24, 39, 0.10);
+  transform: translateY(-1px);
+}
+
+.btn:disabled,
+.btn.disabled{
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+/* Button group looks tighter */
+.btn-group > .btn{
+  border-radius: 999px;
+}
+
+.btn-group > .btn:not(:first-child){
+  margin-left: 0.35rem;
+}
+
+/* ---------- Form controls ---------- */
+.form-control{
+  border-radius: 14px;
+  border: 1px solid var(--nfu-border);
+  padding: 0.65rem 0.9rem;
+}
+
+.form-control:focus{
+  border-color: rgba(17, 24, 39, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(17, 24, 39, 0.08);
+}
+
+.form-range{
+  height: 1.25rem;
+}
+.form-range:focus{
+  outline: none;
+}
+
+/* ---------- Canvas wrapper polish (the div with border rounded bg-light...) ---------- */
+.border.rounded.position-relative.bg-light.overflow-hidden{
+  border: 1px solid var(--nfu-border) !important;
+  border-radius: var(--nfu-radius) !important;
+  background: #f8fafc !important;
+  box-shadow: var(--nfu-shadow-sm);
+}
+
+/* ---------- Section headings (Editor / Result text) ---------- */
+.fw-bold{
+  color: #0f172a;
+}
+
+.small{
+  color: var(--nfu-muted);
+}
+
+/* ---------- Alerts ---------- */
+.alert{
+  border-radius: 16px;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* ---------- Images ---------- */
+.img-fluid.rounded{
+  border-radius: var(--nfu-radius) !important;
+  border: 1px solid var(--nfu-border);
+  box-shadow: var(--nfu-shadow);
+}
+
+/* ---------- Subtle spacing consistency ---------- */
+.mb-3{
+  margin-bottom: 1.1rem !important;
+}
+.mt-3{
+  margin-top: 1.1rem !important;
+}
+
+/* ---------- Responsive niceness ---------- */
+@media (max-width: 576px){
+  .container{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .btn{
+    padding: 0.55rem 0.95rem;
+  }
+}
+
+
+/* ==== Draw / Erase 버튼(bootstrap btn-primary / btn-outline-primary) 회색톤으로 변경 ==== */
+/* 기능 안 건드리고 CSS로만 덮어씀 */
+
+/* 원하는 “까리한 회색” 팔레트 */
+:root{
+  --nfu-accent: #111827;        /* 거의 블랙 */
+  --nfu-accent-2: #0b1220;      /* hover/active 더 진한 */
+  --nfu-accent-soft: rgba(17,24,39,0.10);
+  --nfu-ring: rgba(17,24,39,0.18);
+}
+
+/* 버튼 그룹 안에서만 적용(다른 페이지 primary 버튼들 영향 최소화) */
+.btn-group[aria-label="mode"] .btn{
+  border-radius: 999px !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* 선택됨: 원래 btn-primary */
+.btn-group[aria-label="mode"] .btn.btn-primary{
+  background: var(--nfu-accent) !important;
+  border-color: var(--nfu-accent) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 18px rgba(17, 24, 39, 0.14);
+}
+
+/* 선택됨 hover */
+.btn-group[aria-label="mode"] .btn.btn-primary:hover{
+  background: var(--nfu-accent-2) !important;
+  border-color: var(--nfu-accent-2) !important;
+  transform: translateY(-1px);
+}
+
+/* 비선택: 원래 btn-outline-primary */
+.btn-group[aria-label="mode"] .btn.btn-outline-primary{
+  background: #fff !important;
+  border-color: rgba(17,24,39,0.28) !important;
+  color: var(--nfu-accent) !important;
+}
+
+/* 비선택 hover */
+.btn-group[aria-label="mode"] .btn.btn-outline-primary:hover{
+  background: var(--nfu-accent-soft) !important;
+  border-color: rgba(17,24,39,0.38) !important;
+  color: var(--nfu-accent) !important;
+  transform: translateY(-1px);
+}
+
+/* 포커스 링(파란 링 제거) */
+.btn-group[aria-label="mode"] .btn:focus,
+.btn-group[aria-label="mode"] .btn:focus-visible{
+  box-shadow: 0 0 0 0.25rem var(--nfu-ring) !important;
+  outline: none !important;
+}
+
+/* 클릭 시 */
+.btn-group[aria-label="mode"] .btn:active{
+  transform: translateY(0px);
+}
+
+/* Draw/Erase 버튼 사이 벌리기 (해당 모드 버튼 그룹만) */
+.btn-group[aria-label="mode"]{
+  display: flex;      /* btn-group을 flex로 바꿔서 */
+  gap: 10px;          /* 여기 숫자만 조절 */
+}
+
+/* btn-group이 원래 붙이려고 border-radius/마진 처리하는거 방지 */
+.btn-group[aria-label="mode"] > .btn{
+  margin-left: 0 !important;
+}
+
+
+/* ==== 브러시(range) 슬라이더 “파란색” -> 까리한 회색 ==== */
+/* 브라우저별(Chrome/Safari/Firefox) 대응 */
+
+/* 공통: 포커스 파란 링 제거/대체 */
+.form-range:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* -------- WebKit (Chrome / Safari / Edge) -------- */
+.form-range::-webkit-slider-runnable-track{
+  height: 6px;
+  background: rgba(17,24,39,0.14);   /* 트랙 회색 */
+  border-radius: 999px;
+}
+
+.form-range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;                 /* track(6px) 중앙 정렬 */
+  border-radius: 999px;
+  background: #111827;              /* 엄지(thumb) 진회색 */
+  border: 2px solid #ffffff;        /* 흰 테두리로 깔끔하게 */
+  box-shadow: 0 8px 18px rgba(17,24,39,0.18);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.form-range::-webkit-slider-thumb:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(17,24,39,0.22);
+}
+
+/* active(드래그 중) */
+.form-range:active::-webkit-slider-thumb{
+  transform: translateY(0px) scale(1.10);
+}
+
+/* -------- Firefox -------- */
+.form-range::-moz-range-track{
+  height: 6px;
+  background: rgba(17,24,39,0.14);
+  border-radius: 999px;
+}
+
+.form-range::-moz-range-thumb{
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #111827;
+  border: 2px solid #ffffff;
+  box-shadow: 0 8px 18px rgba(17,24,39,0.18);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.form-range::-moz-range-thumb:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(17,24,39,0.22);
+}
+
+/* (선택) Firefox 파란 진행바 제거/통일 */
+.form-range::-moz-range-progress{
+  height: 6px;
+  background: rgba(17,24,39,0.22);
+  border-radius: 999px;
+}
+
+.infor{
+  color:#c0c1c2;
   text-align: center;
+  font-size: smaller;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/*=============*/
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+
+.nfu-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 72px;              /* ★ 높이 고정 (중요) */
+
+  z-index: 9999;
+  background: #0b1220;
+
+  display: flex;            /* 가운데 정렬 */
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding-left: 32px;
+
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
 }
 
-.App-link {
-  color: #61dafb;
+
+.container.py-4{
+  padding-top: 50px !important; /* 필요하면 80~120 사이로 조절 */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+/* === FIXED HEADER: 절대 높이 안 변하게 강제 === */
+.nfu-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 72px !important;          /* 고정 높이 */
+  box-sizing: border-box;           /* height 안에 padding 포함 */
+
+  padding: 0 !important;            /* 기존 padding 전부 제거 */
+  margin: 0 !important;
+
+  z-index: 9999;
+  background:
+    linear-gradient(to bottom, rgba(12,22,32,0.10) 110px, rgba(15,22,37,0.00) 310px),
+    #ffffff;
+  background-repeat: no-repeat;
+  font-family: "Pretendard", system-ui, -apple-system, sans-serif;
+
+  display: flex;
+  align-items: center;
+  padding-left: 32px !important;    /* 좌측 여백만 (원하면 값 조절) */
+
+  overflow: hidden;                 /* 내용 때문에 높이 늘어나는 느낌 방지 */
 }
+
+/* h1 기본 margin 때문에 높이 튀는 것도 방지 */
+.nfu-header h1{
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+/* 본문이 헤더 아래에서 시작하게(겹침 방지) */
+body{
+  padding-top: 72px;                /* 헤더 높이랑 동일 */
+}
+
+
+/* =================================================*/

@@ -3,6 +3,8 @@ import React, { useState, useRef } from "react";
 import Uploader from "../components/Uploader";
 import MaskEditor from "../components/MaskEditor";
 import ResultPanel from "../components/ResultPanel";
+import Header from "./Header";
+import logo from "../nfulogo.png"; 
 
 export default function Main() {
   const [imageFile, setImageFile] = useState(null);
@@ -180,18 +182,21 @@ export default function Main() {
     };
 
 
+ 
 
 
-
-  return (
+  return (<>
+    <div className="nfu-header">
+        <h1 className="h3 "><b> Not For U</b></h1>
+    </div>
     <div className="container py-4">
+     
       {/* Header */}
-      <div className="mb-3">
-        <h1 className="h3 mb-1">Object Remover</h1>
-        
-      </div>
+      
+      
 
-      <div className="row g-3 align-items-start">
+
+      <div className="row g-3 align-items-start mt-5 mb-5">
         {/* Left: Editor */}
         <div className="col-12 col-lg-7">
           <div className="d-flex align-items-center justify-content-between mb-2">
@@ -305,19 +310,20 @@ export default function Main() {
         {/* Right: Result */}
         <div className="col-12 col-lg-5">
           <div className="fw-bold mb-2">Result</div>
-
           <div className="card shadow-sm">
             <div className="card-body">
               <ResultPanel resultUrl={resultUrl} />
               <div className="text-secondary small mt-3">
-                
               </div>
             </div>
           </div>
         </div>
       </div>
-
-     
+      {/*설명*/}
+      <div className ="infor mt-5">
+          <p>본 페이지는 상업적 목적을 위한 것이 아닌 학습용임을 알립니다.</p>
+          <p>무단 배포는 하지 않아주시면 감사하겠습니다.</p>
+      </div>
     </div>
-  );
+  </>);
 }
