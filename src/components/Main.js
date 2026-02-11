@@ -3,8 +3,6 @@ import React, { useState, useRef } from "react";
 import Uploader from "../components/Uploader";
 import MaskEditor from "../components/MaskEditor";
 import ResultPanel from "../components/ResultPanel";
-import Header from "./Header";
-import logo from "../nfulogo.png"; 
 
 export default function Main() {
   const [imageFile, setImageFile] = useState(null);
